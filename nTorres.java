@@ -1,5 +1,5 @@
-public class nReinas {
-     //Atributos
+public class nTorres {
+    //Atributos
     //----------------------------------------------------
     private int tablero[][];
     private int n;
@@ -9,9 +9,9 @@ public class nReinas {
 
     //Constructor
     //----------------------------------------------------
-    public nReinas(int reinas){
-        n = reinas;
-        tablero = new int [reinas][reinas];
+    public nTorres(int Torres){
+        n = Torres;
+        tablero = new int [Torres][Torres];
         inicializarMatriz();
         soluciones = 0;
     }
@@ -98,64 +98,9 @@ public class nReinas {
    }
    // Fin hDerecha
 
-    //diAbajo
-    //verifica si hay un uno diagonal izquierda hacia abaho
-    public boolean diAbajo(int f, int c){ //recibe posicion de la matriz
-        for(int i = f+1, j = c-1; i < n && j >= 0; i++, j--){
-           if(tablero[i][j] == 1){
-                return true;
-           }
-        }           
-        return false;
-   }
-   // Fin diAbajo
-
-    //diArriba
-    //verifica si hay un uno diagonal izquierda hacia abaho
-    public boolean diArriba(int f, int c){ //recibe posicion de la matriz
-        for(int i = f-1, j = c-1; i >= 0 && j>=0; i--, j--){
-           if(tablero[i][j] == 1){
-            return true;
-           }
-        }   
-        return false;        
-   }
-   // Fin diArriba
-
-   //Diagonal Derecha Arriba
-   public boolean ddArriba(int f, int c){ //recibe posicion de la matriz
-    for(int i = f-1, j = c+1; i >= 0 && j<n; i--, j++){
-            if(tablero[i][j] ==1){
-                return true;
-            }
-        }  
-        return false;          
-    }
-    // Fin ddArriba
-
-    //Diagonal derecja abajo
-    public boolean ddAbajo(int f, int c){ //recibe posicion de la matriz
-        for(int i = f+1, j = c+1; i <n && j<n; i++, j++){
-                if(tablero[i][j] == 1){
-                    return true;
-                }
-        }        
-        return false;    
-    }
-        // Fin ddAbajo
-
-
-    // -----------------Insertar en una posicion-------------------
-    public void insertarInTo(int f, int c, int e){
-        tablero [f][c] = e;
-    }
-    //---------------Fin Insertar en una posicion------------------
-
-    // Validar Posicion
-    // Valida si en la posicion no hay otra reina que pueda atacar
-    //---------------------------------------------------------------
+   //Validar Posicion de Torre
     public boolean validarPosicion(int f, int c){
-        if( hIzquierda(f, c) == true || hDerecha(f, c) == true || vAbajo(f, c) == true || vArriba(f, c) == true || diAbajo(f, c) == true || diArriba(f, c) == true || ddArriba(f, c) == true || ddAbajo(f, c) == true){
+        if( hIzquierda(f, c) == true || hDerecha(f, c) == true || vAbajo(f, c) == true || vArriba(f, c) == true){
             return true;
         }else{
             return false; 
@@ -167,21 +112,21 @@ public class nReinas {
     //Colocar Reinas
     //Coloca las reinas en el tablero usando "BACKTRAKING"
     //_________________________________________________________________
-    public void colocarReina(int f, int Rcolocada){
+    public void colocarPieza(int f, int Pcolocada){
         for(int i = f; i < n; i++){
             for (int j = 0 ; j < n ; j++){
                 if (validarPosicion(i, j) == false){
                     tablero[i][j] = 1;
-                    Rcolocada++;
-                    if(Rcolocada == n){
+                    Pcolocada++;
+                    if(Pcolocada == n){
                         soluciones++;
                         printMatriz();  
                     }else{
-                        colocarReina(i +1 , Rcolocada);
+                        colocarPieza(i +1 , Pcolocada);
                     }
                     if(tablero [i][j] == 1){
                         tablero [i][j] = 0;
-                        Rcolocada--;
+                        Pcolocada--;
                     }
                 }//If Validacion
             }//Fin for j
@@ -196,5 +141,7 @@ public class nReinas {
     }
     //Fin metodos
     //----------------------------------------------------
+    
+
     
 }
